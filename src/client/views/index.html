@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel App</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="header-title">Udacity Final Project</h1>
+    </header>
+    <main class="container">
+      <h1 class="app-title">Travel Planner</h1>
+
+      <form id="travel-form">
+        <label for="location">Location:</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          placeholder="Where will you go? e.g., London"
+          required
+        />
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start-date" required />
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end-date" required />
+        <button type="submit" id="submit" disabled>Add Trip</button>
+      </form>
+      <section id="trip-container"></section>
+    </main>
+    <footer>
+      <h4 class="footer-title">Udacity Final Project. All rights reserved 2024.</h4>
+    </footer>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
+  </body>
+</html>
