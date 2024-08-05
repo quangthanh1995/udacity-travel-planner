@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -8,6 +7,8 @@ module.exports = {
   output: {
     libraryTarget: "var",
     library: "Client",
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
   mode: "development",
   devtool: "source-map",
@@ -17,7 +18,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: "babel-loader",
       },
       {
         test: /\.scss$/,
@@ -30,18 +31,15 @@ module.exports = {
       template: "./src/client/views/index.html",
       filename: "./index.html",
     }),
-    new CleanWebpackPlugin({
-      // Simulate the removal of files
-      dry: true,
-      // Write Logs to Console
-      verbose: true,
-      // Automatically remove all unused webpack assets on rebuild
-      cleanStaleWebpackAssets: true,
-      protectWebpackAssets: false,
-    }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     port: 3000,
-    allowedHosts: ["all"],
+    allowedHosts: "all",
+    static: path.join(__dirname, "dist"),
+    hot: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
 };
